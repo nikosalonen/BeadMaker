@@ -126,6 +126,31 @@ Acceptance
 
 ---
 
+### Phase 10 — Kotlin adoption and modern UI (planning)
+
+- [ ] Enable Kotlin in Gradle (Kotlin JVM target 21)
+- [ ] Add static analysis for Kotlin (ktlint + detekt) as optional quality gates
+- [ ] Interop strategy: keep `core` Java, add Kotlin gradually; no big-bang rewrites
+- [ ] Start with new code in Kotlin (utility wrappers, small services)
+- [ ] Evaluate UI path:
+  - Option A: Compose for Desktop (JetBrains) for a modern, native-feeling UI
+  - Option B: JavaFX 21 with Kotlin for FXML-free, code-first views
+- [ ] Spike a small, non-critical view in Kotlin UI (e.g., About dialog or settings panel)
+- [ ] Bridge plan: embed new UI alongside Swing during migration; keep packaging unchanged
+
+Acceptance
+- [ ] Kotlin toolchain compiles alongside Java; tests run in CI
+- [ ] One small production feature implemented in Kotlin
+- [ ] Documented migration playbook for future Kotlin UI work
+
+Notes and risks
+- Interop is seamless; prefer Kotlin in new modules, avoid mass rewrites
+- Compose: fast iteration, modern components; verify PDF/export and image pipeline remain unaffected
+- JavaFX: stable, hardware-accelerated; check theming and packaging footprint
+- Ensure accessibility/HiDPI and keyboard shortcuts parity before larger UI changes
+
+---
+
 ### Risks and mitigations
 - Processing vs Java 21/modules: keep classpath-based initially; modularize later
 - PDF backend parity: add regression tests and visual checks on sample projects
