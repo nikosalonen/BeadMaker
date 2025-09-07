@@ -2,6 +2,7 @@ package beadMaker;
 
 import beadMaker.Palette.ExcludePearls;
 import beadMaker.Palette.ExcludeTranslucents;
+import beadMaker.config.PathsConfig;
 import beadMaker.export.PDFHelper;
 import beadMaker.helpers.XMLWorker;
 import core.event.InterObjectCommunicatorEventListener;
@@ -82,6 +83,7 @@ public class BMenuBar extends MenuBar implements InterObjectCommunicatorEventLis
 
   private boolean useAppData;
   private String appDataFolderName;
+  private PathsConfig pathsConfig;
 
   // CONSTRUCTOR
   public BMenuBar(
@@ -103,6 +105,7 @@ public class BMenuBar extends MenuBar implements InterObjectCommunicatorEventLis
     this.configXML = myConfigXML;
     this.useAppData = myUseAppData;
     this.appDataFolderName = myAppDataFolderName;
+    this.pathsConfig = new PathsConfig(useAppData, appDataFolderName);
     init();
   }
 
@@ -128,33 +131,13 @@ public class BMenuBar extends MenuBar implements InterObjectCommunicatorEventLis
         "$$$$$$$$$$$$$$$$HOLY SCHNIKES$$$$$$$$$$$$$$$$$$", MessageLevel.MESSAGE);
 
     // populate images submenu
-    File myImagePath =
-        new File(
-            xmlHelper.GetAbsoluteFilePathStringFromXml(
-                "currentImagePath", configXML, useAppData, appDataFolderName));
+    File myImagePath = new File(pathsConfig.getImagesDir());
     if (myImagePath.isDirectory()) {
       consoleHelper.PrintMessage(myImagePath.toString());
-      PopulateImageMenu(
-          xmlHelper.GetAbsoluteFilePathStringFromXml(
-              "currentImagePath", configXML, useAppData, appDataFolderName));
+      PopulateImageMenu(pathsConfig.getImagesDir());
     } else {
-      if (useAppData) {
-        consoleHelper.PrintMessage(
-            System.getenv("APPDATA")
-                + File.separator
-                + appDataFolderName
-                + File.separator
-                + "images");
-        PopulateImageMenu(
-            System.getenv("APPDATA")
-                + File.separator
-                + appDataFolderName
-                + File.separator
-                + "images");
-      } else {
-        consoleHelper.PrintMessage(System.getProperty("user.dir") + File.separator + "images");
-        PopulateImageMenu(System.getProperty("user.dir") + File.separator + "images");
-      }
+      consoleHelper.PrintMessage(pathsConfig.getImagesDir());
+      PopulateImageMenu(pathsConfig.getImagesDir());
     }
 
     // construct the menu
@@ -274,47 +257,21 @@ public class BMenuBar extends MenuBar implements InterObjectCommunicatorEventLis
   void SelectImage() {
 
     String imageToLoad;
-    File myImagePath =
-        new File(
-            xmlHelper.GetAbsoluteFilePathStringFromXml(
-                "currentImagePath", xmlHelper.configXML, useAppData, appDataFolderName));
+    File myImagePath = new File(pathsConfig.getImagesDir());
 
     if (myImagePath.isDirectory()) {
       consoleHelper.PrintMessage(myImagePath.toString());
       imageToLoad =
           fileHelper.GetFilenameFromFileChooser(
-              imageFileExtensions,
-              imageFileDescription,
-              xmlHelper.GetAbsoluteFilePathStringFromXml(
-                  "currentImagePath", xmlHelper.configXML, useAppData, appDataFolderName));
+              imageFileExtensions, imageFileDescription, pathsConfig.getImagesDir());
       if (imageToLoad != null) {
         LoadImage(imageToLoad, true);
       }
     } else {
-      if (useAppData) {
-        consoleHelper.PrintMessage(
-            System.getenv("APPDATA")
-                + File.separator
-                + appDataFolderName
-                + File.separator
-                + "images");
-        imageToLoad =
-            fileHelper.GetFilenameFromFileChooser(
-                imageFileExtensions,
-                imageFileDescription,
-                System.getenv("APPDATA")
-                    + File.separator
-                    + appDataFolderName
-                    + File.separator
-                    + "images");
-      } else {
-        consoleHelper.PrintMessage(System.getProperty("user.dir") + File.separator + "images");
-        imageToLoad =
-            fileHelper.GetFilenameFromFileChooser(
-                imageFileExtensions,
-                imageFileDescription,
-                System.getProperty("user.dir") + File.separator + "images");
-      }
+      consoleHelper.PrintMessage(pathsConfig.getImagesDir());
+      imageToLoad =
+          fileHelper.GetFilenameFromFileChooser(
+              imageFileExtensions, imageFileDescription, pathsConfig.getImagesDir());
 
       if (imageToLoad != null) {
         LoadImage(imageToLoad, true);
