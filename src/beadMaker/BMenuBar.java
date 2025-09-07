@@ -2,7 +2,7 @@ package beadMaker;
 
 import beadMaker.Palette.ExcludePearls;
 import beadMaker.Palette.ExcludeTranslucents;
-import beadMaker.helpers.PDFHelper;
+import beadMaker.export.PDFHelper;
 import beadMaker.helpers.XMLWorker;
 import core.event.InterObjectCommunicatorEventListener;
 import core.helper.FileHelper;

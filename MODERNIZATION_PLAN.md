@@ -58,7 +58,7 @@ Acceptance
 ### Phase 4 — Architecture hardening (non-breaking)
 - [x] Wrap `InterObjectCommunicator` with a typed event-bus interface and migrate gradually
 - [x] Introduce `ConfigService` around XML read/write (schema validation pending)
-- [ ] Separate packages by responsibility: `core` (algorithms), `ui` (Swing), `export` (PDF/PNG)
+- [x] Separate packages by responsibility: start `export` (moved `PDFHelper`); `core`/`ui` pending
 - [ ] Replace ad-hoc paths with a `PathsConfig` abstraction
 
 Acceptance
