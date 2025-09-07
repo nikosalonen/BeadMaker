@@ -51,6 +51,9 @@ dependencies {
 
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+
+    // Modern Swing Look and Feel
+    implementation 'com.formdev:flatlaf:3.5.4'
 }
 
 application {

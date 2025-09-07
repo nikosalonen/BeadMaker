@@ -3,6 +3,8 @@ package beadMaker;
 import beadMaker.arch.EventBus;
 import beadMaker.arch.InterObjectCommunicatorEventBus;
 import beadMaker.helpers.XMLWorker;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import core.event.InterObjectCommunicatorEventListener;
 import core.helper.FileHelper;
 import core.logging.ExceptionLogger;
@@ -17,6 +19,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 public class BeadMaker implements InterObjectCommunicatorEventListener {
   /*
@@ -85,9 +88,23 @@ public class BeadMaker implements InterObjectCommunicatorEventListener {
     oComm.setInterObjectCommunicatorEventListener(this);
     EventBus eventBus = new InterObjectCommunicatorEventBus(oComm);
 
-    windowController = new WindowController("Pixel Perfect", oComm, useAppData, appDataFolderName);
-
+    // Load config and apply FlatLaf theme (light/dark)
     xmlWorker = new XMLWorker(useAppData, appDataFolderName);
+    try {
+      String theme = xmlWorker.GetDataFromXml("ui.theme", xmlWorker.configXML);
+      if ("dark".equalsIgnoreCase(theme)) {
+        UIManager.setLookAndFeel(new FlatDarkLaf());
+      } else {
+        UIManager.setLookAndFeel(new FlatLightLaf());
+      }
+    } catch (Exception e) {
+      try {
+        UIManager.setLookAndFeel(new FlatLightLaf());
+      } catch (Exception ignore) {
+      }
+    }
+
+    windowController = new WindowController("Pixel Perfect", oComm, useAppData, appDataFolderName);
 
     fileHelper = new FileHelper(useAppData, appDataFolderName);
 
@@ -248,7 +265,7 @@ public class BeadMaker implements InterObjectCommunicatorEventListener {
     ConsoleHelper.PrintMessage("renderScrollPanel width = " + imageController.renderScrollPanel.getWidth() + ";  renderScrollPanel height = " + imageController.renderScrollPanel.getHeight());
     int bestFitZoomValue = MathHelper.getMinimumValue(
     	imageController.renderScrollPanel.getWidth()  * 100 / imageController.originalCleanedImage.width,
-    	imageController.renderScrollPanel.getHeight() * 100 / imageController.originalCleanedImage.height
+    	imageController.renderScrollPanel.getHeight() * 100 / imageController.originalCleanedImage height
     );
     imageController.setColorMatchingWeight(
     	"Zoom %",
@@ -276,8 +293,8 @@ public class BeadMaker implements InterObjectCommunicatorEventListener {
     //			ConsoleHelper.PrintMessage("InterObjectCommunicatorEvent in BeadMaker with object type
     // String: <" + StringHelper.getLeftString(s, 16) + ">");
     //			if (StringHelper.getLeftString(s, 16).equals("Total Beads Used")) {
-    //	        	totalBeadsUsedLabel.setText(s);
-    //	        }
+    //				totalBeadsUsedLabel setText(s);
+    //			}
     //		}
   }
 

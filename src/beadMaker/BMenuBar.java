@@ -68,6 +68,7 @@ public class BMenuBar extends MenuBar implements InterObjectCommunicatorEventLis
   private Menu settingsMenu = new Menu("Settings");
   private CheckboxMenuItem expertMode =
       new CheckboxMenuItem("  Expert Mode          Ctrl+M"); // leave extra
+  private CheckboxMenuItem darkTheme = new CheckboxMenuItem("  Dark Theme");
 
   private Menu helpMenu = new Menu("Help");
   private MenuItem tutorialVideo = new MenuItem("Tutorial Video (YouTube)");
@@ -158,6 +159,7 @@ public class BMenuBar extends MenuBar implements InterObjectCommunicatorEventLis
 
     this.add(settingsMenu);
     settingsMenu.add(expertMode);
+    settingsMenu.add(darkTheme);
 
     this.add(helpMenu);
     helpMenu.add(tutorialVideo);
@@ -234,6 +236,15 @@ public class BMenuBar extends MenuBar implements InterObjectCommunicatorEventLis
           }
         });
 
+    darkTheme.setState(
+        "dark".equalsIgnoreCase(xmlHelper.GetDataFromXml("ui.theme", xmlHelper.configXML)));
+    darkTheme.addItemListener(
+        new ItemListener() {
+          public void itemStateChanged(ItemEvent e) {
+            ToggleTheme();
+          }
+        });
+
     tutorialVideo.addActionListener(
         new ActionListener() {
           public synchronized void actionPerformed(ActionEvent e) {
@@ -290,6 +301,17 @@ public class BMenuBar extends MenuBar implements InterObjectCommunicatorEventLis
         configFilePath,
         useAppData,
         appDataFolderName);
+  }
+
+  // ---------------------------------------------------------------------------
+  // ToggleTheme
+  // ---------------------------------------------------------------------------
+  void ToggleTheme() {
+    String newTheme = darkTheme.getState() ? "dark" : "light";
+    xmlHelper.AlterXML("ui.theme", newTheme, configFilePath, useAppData, appDataFolderName);
+    xmlHelper.configXML = xmlHelper.GetXMLFromFile(configFilePath);
+    // Inform the user to restart for full LAF application
+    consoleHelper.PrintMessage("Theme set to " + newTheme + ". Restart app to apply.");
   }
 
   // ---------------------------------------------------------------------------
