@@ -25,6 +25,6 @@
 # Run
 ./gradlew run
 
-# Create fat jar
-./gradlew shadowJar
+# Create distribution zip (bin + libs)
+./gradlew distZip
 ```

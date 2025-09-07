@@ -25,11 +25,11 @@ Acceptance
 - [x] Migrate from Eclipse project to Gradle (single project to start)
 - [x] Define dependencies with versions; pin Processing and PDF libs
 - [x] Add SLF4J + Logback; replace `System.out` with logging
-- [ ] Replace iText with OpenPDF or Apache PDFBox
-- [x] Add application plugin tasks: `run`, fat jar
+- [x] Confirm Processing PDF backend (no iText); keep `org.processing:pdf`
+- [x] Add application plugin tasks: `run` and distribution (`distZip`)
 
 Acceptance
-- [ ] `./gradlew build run` works; produces runnable fat jar
+- [x] `./gradlew build run` works; runnable app via `distZip`
 
 ---
 
