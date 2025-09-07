@@ -111,6 +111,31 @@ spotless {
     }
 }
 
+// Toggle quality tasks (Checkstyle/SpotBugs/Spotless) via -Pquality
+def enableQuality = project.hasProperty('quality')
+
+tasks.withType(Checkstyle).configureEach {
+    onlyIf { enableQuality }
+}
+
+tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
+    onlyIf { enableQuality }
+}
+
+tasks.matching { it.name == 'spotlessCheck' }.configureEach {
+    onlyIf { enableQuality }
+}
+
+tasks.matching { it.name == 'jacocoTestReport' }.configureEach {
+    onlyIf { enableQuality }
+}
+
+tasks.register('qualityCheck') {
+    group = 'verification'
+    description = 'Run formatting, static analysis, and coverage reports.'
+    dependsOn 'spotlessCheck', 'checkstyleMain', 'spotbugsMain', 'test', 'jacocoTestReport'
+}
+
 tasks.jar.configure {
     manifest {
         attributes 'Main-Class': application.mainClass
