@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import beadMaker.ImageController.PegboardMode;
 import beadMaker.helpers.XMLWorker;
 import core.event.InterObjectCommunicatorEventListener;
+import beadMaker.arch.EventBus;
+import beadMaker.arch.InterObjectCommunicatorEventBus;
 import core.helper.FileHelper;
 import core.logging.ExceptionLogger;
 import core.swingComponent.JComboBoxMaker;
@@ -87,6 +89,7 @@ public class BeadMaker implements InterObjectCommunicatorEventListener
 		
 		oComm = new InterObjectCommunicator();
 		oComm.setInterObjectCommunicatorEventListener(this);
+		EventBus eventBus = new InterObjectCommunicatorEventBus(oComm);
 		
 		windowController = new WindowController("Pixel Perfect", oComm, useAppData, appDataFolderName);	
 		
