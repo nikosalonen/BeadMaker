@@ -45,13 +45,13 @@ Acceptance
 ---
 
 ### Phase 3 — Packaging and release
-- [ ] Use `jlink` to build trimmed runtime image
-- [ ] Use `jpackage` to produce platform installers (Windows first)
-- [ ] Automate tag-based releases that upload installers and checksums
+- [ ] Use `jlink` to build trimmed runtime image (deferred)
+- [ ] Use `jpackage` to produce platform installers (deferred)
+- [x] Automate tag-based releases that upload distribution zip
 - [ ] Optional: code signing for Windows installer
 
 Acceptance
-- [ ] `./gradlew package` or `dist` produces installer(s); release workflow publishes on tag
+- [x] `./gradlew distZip` produces distribution zip; release workflow publishes on tag
 
 ---
 

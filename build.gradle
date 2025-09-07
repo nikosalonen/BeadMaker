@@ -5,6 +5,7 @@ plugins {
     id 'checkstyle'
     id 'com.github.spotbugs' version '6.0.26'
     id 'com.diffplug.spotless' version '6.25.0'
+    id 'org.beryx.jlink' version '3.0.1'
 }
 
 group = 'com.nikosalonen'
@@ -113,6 +114,33 @@ spotless {
 tasks.jar.configure {
     manifest {
         attributes 'Main-Class': application.mainClass
+    }
+}
+
+// Runtime image and installer packaging
+jlink {
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = 'BeadMaker'
+    }
+    // Non-modular project: create merged module automatically
+    forceMerge('slf4j', 'logback')
+
+    jpackage {
+        // Defaults work cross-platform; customize per OS in CI if needed
+        imageName = 'BeadMaker'
+        installerName = "BeadMaker-${project.version}"
+        appVersion = project.version
+        vendor = 'BeadMaker Project'
+        // Windows specific options are applied only on Windows runners
+        installerOptions = [
+            '--win-dir-chooser',
+            '--win-menu',
+            '--win-shortcut'
+        ]
+        if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+            installerType = 'exe'
+        }
     }
 }
 

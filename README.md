@@ -37,3 +37,12 @@
 [![CI](https://github.com/nikosalonen/BeadMaker/actions/workflows/ci.yml/badge.svg)](https://github.com/nikosalonen/BeadMaker/actions/workflows/ci.yml)
 
 GitHub Actions runs build and tests on Windows, macOS, and Linux with Java 21.
+
+### Packaging
+
+- Developer distribution (zip):
+```bash
+./gradlew distZip
+```
+- Tagged releases publish the distribution zip automatically.
+- Native installers (jlink/jpackage) are planned; current builds ship as a portable zip.
