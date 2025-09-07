@@ -1,6 +1,6 @@
 package beadMaker.helpers;
 
-import java.io.File;
+import beadMaker.config.PathsConfig;
 import processing.data.XML;
 
 public class XMLWorker extends core.helper.XmlHelper {
@@ -9,29 +9,15 @@ public class XMLWorker extends core.helper.XmlHelper {
   public XML[] projectXML = new XML[1];
 
   String configFilePath;
+  private final PathsConfig pathsConfig;
 
   // ------------------------------------------------------------
   // CONSTRUCTOR
   // ------------------------------------------------------------
   public XMLWorker(boolean useAppData, String appDataFolderName) {
     super(useAppData, appDataFolderName);
-    if (useAppData) {
-      configFilePath =
-          System.getenv("APPDATA")
-              + File.separator
-              + appDataFolderName
-              + File.separator
-              + "config"
-              + File.separator
-              + "_default_config.xml";
-    } else {
-      configFilePath =
-          System.getProperty("user.dir")
-              + File.separator
-              + "config"
-              + File.separator
-              + "_default_config.xml";
-    }
+    this.pathsConfig = new PathsConfig(useAppData, appDataFolderName);
+    this.configFilePath = pathsConfig.getDefaultConfigPath();
     configXML = GetXMLFromFile(configFilePath);
     projectXML =
         GetXMLFromFile(

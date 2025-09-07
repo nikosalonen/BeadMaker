@@ -59,7 +59,7 @@ Acceptance
 - [x] Wrap `InterObjectCommunicator` with a typed event-bus interface and migrate gradually
 - [x] Introduce `ConfigService` around XML read/write (schema validation pending)
 - [x] Separate packages by responsibility: start `export` (moved `PDFHelper`); `core`/`ui` pending
-- [ ] Replace ad-hoc paths with a `PathsConfig` abstraction
+- [x] Replace ad-hoc paths with a `PathsConfig` abstraction (used by `XMLWorker`)
 
 Acceptance
 - [ ] Modules or packages compile cleanly; features unchanged; logs structured
