@@ -783,7 +783,7 @@ public class ControlPanel extends JPanel implements InterObjectCommunicatorEvent
     // add(controlPanel2);
   }
 
-  void setExpertMode(boolean myExpertMode) {
+  public void setExpertMode(boolean myExpertMode) {
     expertMode = myExpertMode;
     if (!(controlPanel == null)) {
       buildControls();

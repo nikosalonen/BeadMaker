@@ -1,5 +1,7 @@
-package beadMaker;
+package beadMaker.ui;
 
+import beadMaker.InterObjectCommunicator;
+import beadMaker.KeyboardListener;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -29,13 +31,9 @@ public class WindowController extends JFrame {
     this.appDataFolderName = myAppDataFolderName;
 
     oComm = myOComm;
-    // this.setPreferredSize (new Dimension(900, 600));
-    // this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     this.setLayout(new BorderLayout());
     this.setPreferredSize(new Dimension(1600, 1000));
-    // this.setState(Frame.NORMAL);
-    // this.setVisible(true);
     try {
       if (useAppData) {
         this.setIconImage(
@@ -66,23 +64,14 @@ public class WindowController extends JFrame {
     KeyboardListener kl = new KeyboardListener(oComm);
   }
 
-  // ---------------------------------------------------------------------------
-  // add
-  // ---------------------------------------------------------------------------
   public void add(JLabel jLabel, String borderLayout) {
     this.getContentPane().add(jLabel, borderLayout);
   }
 
-  // ---------------------------------------------------------------------------
-  // SetCursorState
-  // ---------------------------------------------------------------------------
   void SetCursorState(int myCursorMode) {
     this.setCursor(Cursor.getPredefinedCursor(myCursorMode));
   }
 
-  // -------------------------------------------------------
-  // SetFrameTitle
-  // -------------------------------------------------------
   public void SetFrameTitle(String frameTitle) {
     this.setTitle(frameTitle);
   }

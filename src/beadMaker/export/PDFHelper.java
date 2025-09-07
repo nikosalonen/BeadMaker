@@ -3,7 +3,7 @@ package beadMaker.export;
 import beadMaker.BMImage;
 import beadMaker.ImageController;
 import beadMaker.Palette;
-import beadMaker.WindowController;
+import beadMaker.ui.WindowController;
 import core.helper.FileHelper;
 import core.helper.ProcessingHelper;
 import core.jfxComponent.SynchronousJFXFileChooser;

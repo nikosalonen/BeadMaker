@@ -1,5 +1,6 @@
 package beadMaker;
 
+import beadMaker.ui.WindowController;
 import core.event.InterObjectCommunicatorEventListener;
 import core.helper.ImageHelper;
 import core.helper.MathHelper;

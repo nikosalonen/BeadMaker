@@ -3,7 +3,10 @@ package beadMaker;
 import beadMaker.arch.EventBus;
 import beadMaker.arch.InterObjectCommunicatorEventBus;
 import beadMaker.helpers.XMLWorker;
+import beadMaker.ui.BMenuBar;
+import beadMaker.ui.WindowController;
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import core.event.InterObjectCommunicatorEventListener;
 import core.helper.FileHelper;
@@ -91,6 +94,7 @@ public class BeadMaker implements InterObjectCommunicatorEventListener {
     // Load config and apply FlatLaf theme (light/dark)
     xmlWorker = new XMLWorker(useAppData, appDataFolderName);
     try {
+      FlatLaf.setUseNativeWindowDecorations(false);
       String theme = xmlWorker.GetDataFromXml("ui.theme", xmlWorker.configXML);
       if ("dark".equalsIgnoreCase(theme)) {
         UIManager.setLookAndFeel(new FlatDarkLaf());
