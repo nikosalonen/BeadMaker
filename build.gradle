@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.nikosalonen'
+version = '0.1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+        resources {
+            srcDirs = []
+        }
+    }
+    test {
+        java {
+            srcDirs = []
+        }
+    }
+}
+
+dependencies {
+    // Local helper classes packaged in repository
+    implementation files('exe build resources/beadmaker.jar')
+
+    // Processing core and pdf (3.3.7 is compatible with existing imports)
+    implementation 'org.processing:core:3.3.7'
+    implementation 'org.processing:pdf:3.3.7'
+
+    // Logging (available for future use)
+    implementation 'org.slf4j:slf4j-api:2.0.13'
+    runtimeOnly 'ch.qos.logback:logback-classic:1.5.6'
+}
+
+application {
+    mainClass = 'beadMaker.BeadMaker'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.jar.configure {
+    manifest {
+        attributes 'Main-Class': application.mainClass
+    }
+}
+
+
+

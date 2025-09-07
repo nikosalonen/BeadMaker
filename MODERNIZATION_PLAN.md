@@ -22,11 +22,11 @@ Acceptance
 ---
 
 ### Phase 1 — Build system and dependencies
-- [ ] Migrate from Eclipse project to Gradle (single project to start)
-- [ ] Define dependencies with versions; pin Processing and PDF libs
-- [ ] Add SLF4J + Logback; replace `System.out` with logging
+- [x] Migrate from Eclipse project to Gradle (single project to start)
+- [x] Define dependencies with versions; pin Processing and PDF libs
+- [x] Add SLF4J + Logback; replace `System.out` with logging
 - [ ] Replace iText with OpenPDF or Apache PDFBox
-- [ ] Add application plugin tasks: `run`, fat jar
+- [x] Add application plugin tasks: `run`, fat jar
 
 Acceptance
 - [ ] `./gradlew build run` works; produces runnable fat jar

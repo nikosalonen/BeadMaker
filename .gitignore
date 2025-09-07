@@ -23,6 +23,8 @@ $RECYCLE.BIN/
 # =========================
 **/log
 **/bin
+**/build
+.gradle/
 **/.settings
 *.bak
 *.log

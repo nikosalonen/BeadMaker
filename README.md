@@ -15,3 +15,16 @@
 - Branching: Default branch is `main`. Use short-lived feature branches and open PRs.
 - Conventional Commits: Required for all commits (see `CONTRIBUTING.md`).
 - Code style: See `.editorconfig` and `CONTRIBUTING.md` for guidelines.
+
+### Build and run (Gradle)
+
+```bash
+# Build
+./gradlew build
+
+# Run
+./gradlew run
+
+# Create fat jar
+./gradlew shadowJar
+```
