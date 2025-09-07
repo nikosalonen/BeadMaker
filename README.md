@@ -27,4 +27,13 @@
 
 # Create distribution zip (bin + libs)
 ./gradlew distZip
+
+# Test & Coverage
+./gradlew test jacocoTestReport
 ```
+
+### CI
+
+[![CI](https://github.com/nikosalonen/BeadMaker/actions/workflows/ci.yml/badge.svg)](https://github.com/nikosalonen/BeadMaker/actions/workflows/ci.yml)
+
+GitHub Actions runs build and tests on Windows, macOS, and Linux with Java 21.

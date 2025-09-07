@@ -34,10 +34,10 @@ Acceptance
 ---
 
 ### Phase 2 — CI and quality gates
-- [ ] GitHub Actions workflow: Windows + macOS + Linux build matrix
-- [ ] Add SpotBugs, Checkstyle, and Spotless (formatting) to build
-- [ ] Add JUnit 5 test setup and JaCoCo coverage report
-- [ ] Dependabot for Gradle and GitHub Actions
+- [x] GitHub Actions workflow: Windows + macOS + Linux build matrix
+- [x] Add SpotBugs, Checkstyle, and Spotless (formatting) to build
+- [x] Add JUnit 5 test setup and JaCoCo coverage report
+- [x] Dependabot for Gradle and GitHub Actions
 
 Acceptance
 - [ ] CI green on PRs; status checks required to merge

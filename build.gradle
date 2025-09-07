@@ -1,6 +1,10 @@
 plugins {
     id 'java'
     id 'application'
+    id 'jacoco'
+    id 'checkstyle'
+    id 'com.github.spotbugs' version '6.0.26'
+    id 'com.diffplug.spotless' version '6.25.0'
 }
 
 group = 'com.nikosalonen'
@@ -43,6 +47,9 @@ dependencies {
     // Logging (available for future use)
     implementation 'org.slf4j:slf4j-api:2.0.13'
     runtimeOnly 'ch.qos.logback:logback-classic:1.5.6'
+
+    // Testing
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
 }
 
 application {
@@ -51,6 +58,56 @@ application {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// JaCoCo coverage
+jacoco {
+    toolVersion = '0.8.12'
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+// Checkstyle (non-failing for now)
+checkstyle {
+    toolVersion = '10.17.0'
+    config = resources.text.fromFile('config/checkstyle/checkstyle.xml')
+}
+
+tasks.withType(Checkstyle).configureEach {
+    ignoreFailures = true
+}
+
+// SpotBugs (non-failing for now)
+spotbugs {
+    effort = 'default'
+    reportLevel = 'low'
+}
+
+tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
+    reports.create('html') {
+        required = true
+        outputLocation = layout.buildDirectory.file("reports/spotbugs/${name}.html")
+        stylesheet = 'fancy'
+    }
+    ignoreFailures = true
+}
+
+// Spotless (not wired into check yet)
+spotless {
+    java {
+        target 'src/**/*.java'
+        googleJavaFormat('1.17.0')
+    }
 }
 
 tasks.jar.configure {
