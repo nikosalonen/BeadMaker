@@ -95,10 +95,10 @@ spotbugs {
 }
 
 tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
-    reports.create('html') {
-        required = true
-        outputLocation = layout.buildDirectory.file("reports/spotbugs/${name}.html")
-        stylesheet = 'fancy'
+    reports {
+        html.required.set(true)
+        html.outputLocation.set(layout.buildDirectory.file("reports/spotbugs/${name}.html"))
+        xml.required.set(false)
     }
     ignoreFailures = true
 }

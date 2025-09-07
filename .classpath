@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/21.0.8-win32-x86_64"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Core"/>
-	<classpathentry kind="lib" path="C:/Program Files/processing-3.3.7/modes/java/libraries/pdf/library/itext.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/processing-3.3.7/modes/java/libraries/pdf/library/pdf.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="c:/Program Files/processing-3.3.7/modes/java/libraries/pdf/library/itext.jar"/>
+	<classpathentry kind="lib" path="c:/Program Files/processing-3.3.7/modes/java/libraries/pdf/library/pdf.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
