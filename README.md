@@ -8,3 +8,10 @@
 
 
 
+
+### Development
+
+- Java version: Prefer JDK 21 LTS. If blocked by dependencies, JDK 17 is acceptable.
+- Branching: Default branch is `main`. Use short-lived feature branches and open PRs.
+- Conventional Commits: Required for all commits (see `CONTRIBUTING.md`).
+- Code style: See `.editorconfig` and `CONTRIBUTING.md` for guidelines.
